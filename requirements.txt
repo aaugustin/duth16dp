@@ -1,0 +1,4 @@
+dj_database_url
+django
+django-debug-toolbar
+psycopg2
