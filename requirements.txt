@@ -1,4 +1,6 @@
 dj_database_url
 django
 django-debug-toolbar
+gunicorn
 psycopg2
+whitenoise

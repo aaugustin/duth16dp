@@ -1,6 +1,10 @@
 import os
+import pathlib
 
 import dj_database_url
+
+
+BASE_DIR = pathlib.Path(__file__).parents[1]
 
 DATABASES = {
     'default': dj_database_url.config(default='postgres://duth16dp:duth16dp@localhost:5432/duth16dp'),
@@ -15,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'pgbench',
 ]
@@ -24,6 +29,7 @@ INTERNAL_IPS = ['127.0.0.1']
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -35,6 +41,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'duth16dp.urls'
 
 SECRET_KEY = os.environ['SECRET_KEY']
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = str(BASE_DIR / 'static')
 
 STATIC_URL = '/static/'
 
