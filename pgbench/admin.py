@@ -17,6 +17,9 @@ class Account(admin.ModelAdmin):
         transactions = account.transaction_set.all()
         return ', '.join(str(transaction.delta) for transaction in transactions)
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('transaction_set')
+
 
 @admin.register(models.Teller)
 class Teller(admin.ModelAdmin):
