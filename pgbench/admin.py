@@ -21,3 +21,4 @@ class Teller(admin.ModelAdmin):
 @admin.register(models.Transaction)
 class Transaction(admin.ModelAdmin):
     list_display = ['id', 'teller', 'branch', 'account', 'delta', 'mtime']
+    list_select_related = ['teller', 'branch', 'account']
