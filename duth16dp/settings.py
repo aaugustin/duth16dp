@@ -69,3 +69,11 @@ TEMPLATES = [
 TIME_ZONE = 'UTC'
 
 WSGI_APPLICATION = 'duth16dp.wsgi.application'
+
+
+def show_toolbar_callback(request):
+    return True
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'duth16dp.settings.show_toolbar_callback'
+}
