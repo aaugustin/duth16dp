@@ -10,7 +10,12 @@ class Branch(admin.ModelAdmin):
 
 @admin.register(models.Account)
 class Account(admin.ModelAdmin):
-    list_display = ['id', 'branch', 'balance']
+    list_display = ['id', 'branch', 'balance', 'transactions']
+    list_select_related = ['branch']
+
+    def transactions(self, account):
+        transactions = account.transaction_set.all()
+        return ', '.join(str(transaction.delta) for transaction in transactions)
 
 
 @admin.register(models.Teller)
