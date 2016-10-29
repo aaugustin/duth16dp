@@ -18,7 +18,8 @@ class Account(admin.ModelAdmin):
         return ', '.join(str(transaction.delta) for transaction in transactions)
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('transaction_set')
+        return super().get_queryset(request).prefetch_related(Prefetch(
+            'transaction_set', models.Transaction.objects.order_by('-mtime')))
 
 
 @admin.register(models.Teller)
